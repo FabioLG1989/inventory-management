@@ -76,11 +76,11 @@
       {
         "path": "README.md",
         "heading": "Quick Start",
-        "body": "**One-command startup:**\n```bash\n./scripts/start.sh\n# Starts both backend and frontend\n# Backend: http://localhost:8001\n# Frontend: http://localhost:3000\n# API Docs: http://localhost:8001/docs\n```\n\n**Manual startup:**\n\nBackend:\n```bash\ncd server\nuv venv && uv sync\nuv run python main.py\n```\n\nFrontend:\n```bash\ncd client\nnpm install\nnpm run dev\n```",
+        "body": "**One-command startup:**\n```bash\n./scripts/start.sh\n# Starts both backend and frontend\n# Backend: http://localhost:8001\n# Frontend: http://localhost:3000\n# API Docs: http://localhost:8001/docs\n```\n\n**Manual startup:**\n\nBackend:\n```bash\ncd server\nuv venv && uv sync\nuv run python main.py\n```\n\nFrontend:\n```bash\ncd client\npnpm install\npnpm run dev\n```",
         "fenced_blocks": [
           "./scripts/start.sh\n# Starts both backend and frontend\n# Backend: http://localhost:8001\n# Frontend: http://localhost:3000\n# API Docs: http://localhost:8001/docs",
           "cd server\nuv venv && uv sync\nuv run python main.py",
-          "cd client\nnpm install\nnpm run dev"
+          "cd client\npnpm install\npnpm run dev"
         ]
       }
     ],

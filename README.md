@@ -19,6 +19,11 @@ A full-stack demo application for a Claude Code workshop — inventory managemen
 - Backlog monitoring
 - Spending analytics
 
+## Prerequisites
+
+- [uv](https://docs.astral.sh/uv/) for the Python backend
+- Node.js `^20.19.0 || >=22.12.0` and [pnpm](https://pnpm.io/) for the frontend. The pinned pnpm version is in `client/package.json` (`packageManager`); the easiest way to get it is `corepack enable` (ships with Node), or `npm install -g pnpm`.
+
 ## Quick Start
 
 **One-command startup:**

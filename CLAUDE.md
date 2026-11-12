@@ -11,7 +11,7 @@ This project is initialized with QAF. QAF is the default way of working here.
 1. **Check for a QAF way before every task.** Before starting any task, check whether a QAF skill or agent covers it (skills in `.claude/skills/`, agents in `.claude/agents/`) and use it when one fits. Examples:
    - New idea or feature request → `/create-sdd-ticket`
    - Implementing a ticket → `/implement-ticket` (planning only: `/create-implementation-plan`)
-   - Reviewing a PR → `/pr-reviewer`; security → `/security-review`
+   - Reviewing a PR → `/pr-reviewer` (also runs automatically in CI on every PR); security → `/security-review`
    - Bugs and failures → `/troubleshoot`, `/report-bug`
    - Tests → `/generate-test-cases`, `/ui-testing`, `/requirement-coverage-gap-analysis`
    - Parallel work → `/start-task`; wiki upkeep → `/wiki-refresh`
@@ -34,10 +34,17 @@ Use the Task tool with these specialized subagents for appropriate tasks:
 ### Skills
 - **backend-api-test** skill: Use when writing or modifying tests in `tests/backend` directory with pytest and FastAPI TestClient
 
-### MCP Tools
+### GitHub
 - **ALWAYS use the `gh` CLI** for ALL GitHub operations (PRs, issues, reviews, Actions runs, secrets, API calls via `gh api`)
   - Local branches: use `git checkout -b` / `git switch -c`
-  - Do not use the GitHub MCP tools (`mcp__github__*`)
+  - Do not use the GitHub MCP tools (`mcp__github__*`); no GitHub MCP server is configured
+- **GitHub Actions** (`.github/workflows/`):
+  - `claude-code-review.yml` runs the QAF `/pr-reviewer` skill on every PR open/push and posts one formal review via `gh api`
+  - `claude.yml` runs Claude when someone writes `@claude` in an issue, PR comment or review; QAF skills, `gh`, `git`, `node`, `python3`, `pnpm`, `uv`, `curl`, the start/stop scripts and the Playwright MCP (headless Chromium) are allowed there, so it can start the app and check it in a browser
+  - In CI, `gh` runs as `github-actions[bot]` with the workflow `GITHUB_TOKEN` (`gh api user` is not available); each run uploads Claude's execution log as an artifact for debugging
+  - Workflow changes only take effect after they are merged to `main`
+
+### MCP Tools
 - **ALWAYS use Playwright MCP tools** (`mcp__playwright__*`) for browser testing
   - Test against: `http://localhost:3000` (frontend), `http://localhost:8001` (API)
 
@@ -53,7 +60,7 @@ Use the Task tool with these specialized subagents for appropriate tasks:
 cd server
 uv run python main.py
 
-# Frontend
+# Frontend (needs pnpm: `corepack enable`)
 cd client
 pnpm install && pnpm run dev
 ```

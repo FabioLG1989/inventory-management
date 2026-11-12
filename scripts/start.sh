@@ -17,6 +17,12 @@ echo -e "${BLUE}Starting Factory Inventory Management System...${NC}\n"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
 
+# The client uses pnpm (version pinned in client/package.json "packageManager")
+if ! command -v pnpm >/dev/null 2>&1; then
+    echo -e "${YELLOW}pnpm not found. Install it with 'corepack enable' (ships with Node) or 'npm install -g pnpm', then re-run.${NC}"
+    exit 1
+fi
+
 # Check if backend dependencies are installed
 if [ ! -d "$PROJECT_ROOT/server/.venv" ]; then
     echo -e "${YELLOW}Backend dependencies not found. Installing...${NC}"
@@ -57,7 +63,7 @@ echo -e "${BLUE}API Docs:${NC} http://localhost:8001/docs"
 echo -e "\n${YELLOW}Logs:${NC}"
 echo -e "  Backend: /tmp/inventory-backend.log"
 echo -e "  Frontend: /tmp/inventory-frontend.log"
-echo -e "\n${YELLOW}To stop the servers, run:${NC} ./stop.sh"
+echo -e "\n${YELLOW}To stop the servers, run:${NC} ./scripts/stop.sh"
 echo -e "${YELLOW}Or press Ctrl+C and then run:${NC} kill $BACKEND_PID $FRONTEND_PID"
 
 # Save PIDs to file for stop script

@@ -5,7 +5,7 @@ summary: >-
   The server is a Python FastAPI service running on port 8001 that exposes
   filtered REST endpoints over in-memory mock data. It serves as the sole
   backend for ...
-last_updated: '2026-11-12T18:06:44.520Z'
+last_updated: '2026-11-12T18:59:25.000Z'
 tags:
   - service
   - python
@@ -17,7 +17,7 @@ service_id: server
 
 ## Purpose
 
-The server is a Python FastAPI service running on port 8001 that exposes filtered REST endpoints over in-memory mock data. It serves as the sole backend for the [[client]], providing JSON responses for inventory, orders, demand, backlog, and spending domains. There is no database — all data lives in process memory, loaded at startup from JSON fixtures.
+The server is a Python FastAPI service running on port 8001 that exposes filtered REST endpoints over in-memory mock data. It serves as the sole backend for the [[client]], providing JSON responses for inventory, orders, demand, backlog, spending, and restock-order domains. There is no database — all data lives in process memory, loaded at startup from JSON fixtures.
 
 ## Overview
 
@@ -25,7 +25,7 @@ The server is built on FastAPI with Pydantic for response validation and uvicorn
 
 A typical request flows from the [[client]] through CORS middleware, is dispatched by FastAPI to a handler in `server/main.py`, filtered in-process by `apply_filters` and `filter_by_month` against the module-level in-memory collections, then validated against a Pydantic response model before being serialized to JSON. The full set of endpoints, their parameters, and response shapes is captured in the Facts and API & Contracts tables on this page.
 
-Four query-parameter filters (time period, warehouse, category, order status) apply across the inventory, orders, and dashboard summary endpoints, with two constraints: the inventory endpoints carry no time dimension so the `month` filter is a no-op there, and the demand/backlog endpoints accept no filters at all. Spending resources are split into discrete sub-endpoints (summary, monthly, categories, transactions) rather than being parameterized. CORS is configured to allow all origins, methods, and headers, reflecting the demo nature of the service — see Notable Patterns on this page for details.
+Four query-parameter filters (time period, warehouse, category, order status) apply across the inventory, orders, and dashboard summary endpoints, with two constraints: the inventory endpoints carry no time dimension so the `month` filter is a no-op there, and the demand/backlog endpoints accept no filters at all. Spending resources are split into discrete sub-endpoints (summary, monthly, categories, transactions) rather than being parameterized. Restock orders are the only writable resource: `GET /api/restock-orders` lists them and `POST /api/restock-orders` (201) creates one from a list of SKU/quantity lines, priced with the `unit_cost` and `lead_time_days` fields carried by `server/data/demand_forecasts.json` and rejected with 400 when the total exceeds the request `budget` (or a SKU is unknown or repeated); created orders live in process memory only and reset on restart. CORS is configured to allow all origins, methods, and headers, reflecting the demo nature of the service — see Notable Patterns on this page for details.
 
 Revenue goal constants ($800K/month for single-month views, $9.6M year-to-date for all-months views) are UI-side computations in [[client]] against figures returned by the dashboard summary endpoint; the server itself carries no goal logic.
 
