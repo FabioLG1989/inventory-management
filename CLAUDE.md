@@ -71,6 +71,14 @@ pnpm install && pnpm run dev
 - `GET /api/demand`, `/api/backlog` - No filters
 - `GET /api/spending/*` - Summary, monthly, categories, transactions
 
+## Operational Memory
+Known bugs, environment quirks and open gotchas live in `.claude/memory/operational.md`. The file is gitignored and never committed, because this repo is public.
+- **Location:** use the copy in the main checkout, not in a worktree, so every worktree shares it. Find it with `"$(git rev-parse --path-format=absolute --git-common-dir)/../.claude/memory/operational.md"`.
+- **Read it** before debugging or verifying a change, so you don't chase issues that are already known. One example is the `/api/tasks` 404 in the console.
+- **Add an entry** when you find a bug or quirk you are not fixing in the current task. Use a short heading with **Found** (date and context), **Symptom**, **Cause** (file paths), **Impact** and **Status**.
+- **When it's fixed,** delete the entry, or set its Status to fixed with the PR link.
+- **What not to put here:** credentials, internal hostnames or personal data. Facts that belong in this CLAUDE.md or in code comments go there instead.
+
 ## Common Issues
 1. Use unique keys in v-for (not `index`) - use `sku`, `month`, etc.
 2. Validate dates before `.getMonth()` calls
