@@ -6,6 +6,7 @@ export default {
     orders: 'Orders',
     finance: 'Finance',
     demandForecast: 'Demand Forecast',
+    restocking: 'Restocking',
     companyName: 'Catalyst Components',
     subtitle: 'Inventory Management System'
   },
@@ -106,6 +107,8 @@ export default {
     title: 'Orders',
     description: 'View and manage customer orders',
     allOrders: 'All Orders',
+    submittedOrders: 'Submitted Orders',
+    noSubmittedOrders: 'No restock orders have been submitted yet. Use the Restocking tab to create one.',
     totalOrders: 'Total Orders',
     totalRevenue: 'Total Revenue',
     avgOrderValue: 'Avg Order Value',
@@ -125,7 +128,8 @@ export default {
       totalValue: 'Total Value',
       status: 'Status',
       expectedDelivery: 'Expected Delivery',
-      actualDelivery: 'Actual Delivery'
+      actualDelivery: 'Actual Delivery',
+      leadTime: 'Lead Time'
     }
   },
 
@@ -188,6 +192,36 @@ export default {
     }
   },
 
+  // Restocking
+  restocking: {
+    title: 'Restocking',
+    description: 'Plan restock orders based on demand forecasts and your budget',
+    budget: 'Budget',
+    selectedTotal: 'Selected Total',
+    remaining: 'Remaining',
+    longestLeadTime: 'Longest Lead Time',
+    placeOrder: 'Place Order',
+    placing: 'Placing Order...',
+    overBudget: 'Over budget',
+    recommendations: 'Recommended Restock Items',
+    days: '{count} days',
+    success: 'Order {orderNumber} submitted. Expected delivery: {date}.',
+    viewOrders: 'View Orders',
+    noSelection: 'Select at least one item with a quantity above zero.',
+    overBudgetHint: 'Selection exceeds budget',
+    table: {
+      include: 'Include',
+      sku: 'SKU',
+      itemName: 'Item Name',
+      trend: 'Trend',
+      forecast: 'Forecast Demand',
+      unitCost: 'Unit Cost',
+      leadTime: 'Lead Time',
+      quantity: 'Quantity',
+      lineCost: 'Line Cost'
+    }
+  },
+
   // Filters
   filters: {
     timePeriod: 'Time Period',
@@ -201,6 +235,7 @@ export default {
   // Statuses
   status: {
     delivered: 'Delivered',
+    submitted: 'Submitted',
     shipped: 'Shipped',
     processing: 'Processing',
     backordered: 'Backordered',
