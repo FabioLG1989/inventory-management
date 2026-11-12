@@ -2,7 +2,7 @@
 
 Factory Inventory Management System Demo with GitHub integration - Full-stack application with Vue 3 frontend, Python FastAPI backend, and in-memory mock data (no database).
 
-> ⚠️ **This repository and any fork you create are PUBLIC.** Do not commit credentials, internal hostnames, or private registry URLs. `client/.npmrc` pins the public npm registry and `client/package-lock.json` is gitignored to prevent locally-configured registries from leaking into commits — leave both in place.
+> ⚠️ **This repository and any fork you create are PUBLIC.** Do not commit credentials, internal hostnames, or private registry URLs. The client uses **pnpm**. `client/.npmrc` pins the public npm registry (pnpm honors it) so `client/pnpm-lock.yaml` never records a private registry; `client/package-lock.json` stays gitignored. Leave both in place and check `pnpm-lock.yaml` has no private registry URLs before committing.
 
 ## QAF First (Qubika Agentic Framework)
 
@@ -35,8 +35,9 @@ Use the Task tool with these specialized subagents for appropriate tasks:
 - **backend-api-test** skill: Use when writing or modifying tests in `tests/backend` directory with pytest and FastAPI TestClient
 
 ### MCP Tools
-- **ALWAYS use GitHub MCP tools** (`mcp__github__*`) for ALL GitHub operations
-  - Exception: Local branches only - use `git checkout -b` instead of `mcp__github__create_branch`
+- **ALWAYS use the `gh` CLI** for ALL GitHub operations (PRs, issues, reviews, Actions runs, secrets, API calls via `gh api`)
+  - Local branches: use `git checkout -b` / `git switch -c`
+  - Do not use the GitHub MCP tools (`mcp__github__*`)
 - **ALWAYS use Playwright MCP tools** (`mcp__playwright__*`) for browser testing
   - Test against: `http://localhost:3000` (frontend), `http://localhost:8001` (API)
 
@@ -54,7 +55,7 @@ uv run python main.py
 
 # Frontend
 cd client
-npm install && npm run dev
+pnpm install && pnpm run dev
 ```
 
 ## Key Patterns

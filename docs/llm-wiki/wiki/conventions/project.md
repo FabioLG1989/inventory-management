@@ -25,8 +25,8 @@ Dependency management, shared tooling configuration, and quality-gate convention
 ## Project-Wide Rules
 
 - Repository and any fork is PUBLIC — do not commit credentials, internal hostnames, or private registry URLs.
-- `client/.npmrc` pins the public npm registry and `client/package-lock.json` is gitignored — leave both in place.
-- Use GitHub MCP tools (`mcp__github__*`) for ALL GitHub operations except local branch creation (use `git checkout -b`).
+- The client uses pnpm: `client/.npmrc` pins the public npm registry and `client/pnpm-lock.yaml` is committed; `client/package-lock.json` is gitignored — leave both in place and never commit a lockfile containing private registry URLs.
+- Use the `gh` CLI for ALL GitHub operations (PRs, issues, reviews, Actions, `gh api`); create local branches with `git checkout -b`. Do not use GitHub MCP tools (`mcp__github__*`).
 - Use Playwright MCP tools (`mcp__playwright__*`) for browser testing against `http://localhost:3000` and `http://localhost:8001`.
 - Delegate any create/significant-modify of `.vue` files to the `vue-expert` subagent.
 - Use the `backend-api-test` skill when writing or modifying tests under `tests/backend` (pytest + FastAPI TestClient).

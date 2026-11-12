@@ -3,7 +3,7 @@
 ## Tech Stack
 
 ### client (JavaScript)
-- **Vue** 3 · **npm** · **Vite**
+- **Vue** 3 · **pnpm** · **Vite**
 - **Routing & HTTP**: vue-router, axios
 
 ### server (Python)
@@ -30,7 +30,7 @@ project/
 | `./scripts/start.sh` | Dev-server launcher. | `scripts/start.sh` |
 | `./scripts/stop.sh` | Environment reset. | `scripts/stop.sh` |
 | `./scripts/start.sh` | From README.md § Quick Start | `README.md#quick-start` |
-| `cd client && npm run build` | Build (client) | `client/package.json` |
+| `cd client && pnpm run build` | Build (client) | `client/package.json` |
 
 ### Per-service commands (low-level)
 
@@ -38,7 +38,7 @@ project/
 
 | Service | Start dev environment |
 | ------- | --- |
-| client | `cd client && npm run dev` |
+| client | `cd client && pnpm run dev` |
 
 > Essential commands only — the full command reference (every discovered command and variant) is documented in the project wiki.
 
@@ -52,8 +52,8 @@ project/
 ## Project-Wide Rules
 
 - Repository and any fork is PUBLIC — do not commit credentials, internal hostnames, or private registry URLs.
-- `client/.npmrc` pins the public npm registry and `client/package-lock.json` is gitignored — leave both in place.
-- Use GitHub MCP tools (`mcp__github__*`) for ALL GitHub operations except local branch creation (use `git checkout -b`).
+- The client uses pnpm: `client/.npmrc` pins the public npm registry and `client/pnpm-lock.yaml` is committed; `client/package-lock.json` is gitignored — leave both in place and never commit a lockfile containing private registry URLs.
+- Use the `gh` CLI for ALL GitHub operations (PRs, issues, reviews, Actions, `gh api`); create local branches with `git checkout -b`. Do not use GitHub MCP tools (`mcp__github__*`).
 - Use Playwright MCP tools (`mcp__playwright__*`) for browser testing against `http://localhost:3000` and `http://localhost:8001`.
 - Delegate any create/significant-modify of `.vue` files to the `vue-expert` subagent.
 - Use the `backend-api-test` skill when writing or modifying tests under `tests/backend` (pytest + FastAPI TestClient).
