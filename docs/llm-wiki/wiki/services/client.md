@@ -5,7 +5,7 @@ summary: >-
   The client is a Vue 3 single-page application running on port 3000 that
   renders the operator-facing dashboards: inventory, orders, demand forecasting,
   backlo...
-last_updated: '2026-11-12T18:06:44.520Z'
+last_updated: '2026-11-12T18:59:25.000Z'
 tags:
   - service
   - javascript
@@ -17,7 +17,7 @@ service_id: client
 
 ## Purpose
 
-The client is a Vue 3 single-page application running on port 3000 that renders the operator-facing dashboards: inventory, orders, demand forecasting, backlog, and spending analytics. It is the sole consumer of the [[server]] API, translating user filter selections into parameterized HTTP requests and projecting the returned JSON into reactive display data.
+The client is a Vue 3 single-page application running on port 3000 that renders the operator-facing dashboards: inventory, orders, demand forecasting, backlog, spending analytics, and restocking (budget-driven restock orders at `/restocking`). It is the sole consumer of the [[server]] API, translating user filter selections into parameterized HTTP requests and projecting the returned JSON into reactive display data.
 
 ## Overview
 

@@ -5,7 +5,7 @@ summary: >-
   The repository is a two-service co-located layout — classified as `polyrepo`
   by the structure analyzer, but practically a single-repo with two sibling
   servic...
-last_updated: '2026-11-12T18:06:44.520Z'
+last_updated: '2026-11-12T18:59:25.000Z'
 tags:
   - architecture
   - topology
@@ -24,7 +24,7 @@ The repository is a two-service co-located layout — classified as `polyrepo` b
 | client | `client/` | JavaScript | Vue 3 SPA frontend |
 | server | `server/` | Python | FastAPI REST backend |
 
-The repository root contains shell scripts under `scripts/` that start and stop both services concurrently. No CI configuration is present.
+The repository root contains shell scripts under `scripts/` that start and stop both services concurrently. CI runs on GitHub Actions and is limited to Claude automation (see Automation & CI).
 
 The co-location is intentional: the architecture decision record notes this arrangement keeps the two services accessible for workshop attendees without introducing pnpm/yarn workspace complexity.
 
@@ -138,7 +138,12 @@ The primary automation interface is two shell scripts at the repository root:
 | `scripts/start.sh` | Starts both the backend and frontend dev servers concurrently | `scripts/start.sh` |
 | `scripts/stop.sh` | Stops both servers and resets the environment | `scripts/stop.sh` |
 
-There is no Makefile, Justfile, or Taskfile. There is no CI provider configuration discoverable in the repository. The software version control host is GitHub.
+There is no Makefile, Justfile, or Taskfile. The software version control host is GitHub, and CI is GitHub Actions under `.github/workflows/`. There is no build or test pipeline; both workflows run Claude Code via `anthropics/claude-code-action`:
+
+| Workflow | Trigger | What it does | Source |
+|----------|---------|--------------|--------|
+| Claude Code Review | PR opened / pushed / reopened | Runs the QAF `/pr-reviewer` skill and posts one formal review via `gh api` | `.github/workflows/claude-code-review.yml` |
+| Claude Code | `@claude` in an issue, PR comment or review | Runs Claude with QAF skills and `gh`, `git`, `node`, `python3`, `pnpm`, `uv` allowed | `.github/workflows/claude.yml` |
 
 Build commands per service:
 
