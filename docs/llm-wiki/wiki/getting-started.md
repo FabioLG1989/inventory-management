@@ -31,8 +31,8 @@ _Source: `README.md` § Quick Start_
 > Frontend:
 > ```bash
 > cd client
-> npm install
-> npm run dev
+> pnpm install
+> pnpm run dev
 > ```
 
 ## Wrapper commands
@@ -50,6 +50,6 @@ These wrappers are the canonical entry points. They orchestrate dependent servic
 
 | Action | Service | Command | Source |
 |---|---|---|---|
-| Start dev server | `client` | `cd client && npm run dev` | `client/package.json` |
-| Build | `client` | `cd client && npm run build` | `client/package.json` |
+| Start dev server | `client` | `cd client && pnpm run dev` | `client/package.json` |
+| Build | `client` | `cd client && pnpm run build` | `client/package.json` |
 | Build | `server` | `cd server && uv build` | `server/pyproject.toml` |

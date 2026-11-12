@@ -15,13 +15,13 @@
         },
         "testing": {},
         "commands": {
-          "dev": "cd client && npm run dev",
-          "build": "cd client && npm run build"
+          "dev": "cd client && pnpm run dev",
+          "build": "cd client && pnpm run build"
         },
         "environment": {
           "port": 3000
         },
-        "package_manager": "npm",
+        "package_manager": "pnpm",
         "manifest_file": "client/package.json"
       },
       {
@@ -94,13 +94,13 @@
         },
         {
           "tier": "readme",
-          "command": "npm run dev",
+          "command": "pnpm run dev",
           "description": "From README.md § Quick Start",
           "source": "README.md#quick-start"
         },
         {
           "tier": "package_manager",
-          "command": "cd client && npm run dev",
+          "command": "cd client && pnpm run dev",
           "source": "client/package.json",
           "per_service": "client"
         }
@@ -122,7 +122,7 @@
         },
         {
           "tier": "readme",
-          "command": "npm install",
+          "command": "pnpm install",
           "description": "From README.md § Quick Start",
           "source": "README.md#quick-start"
         },
@@ -142,7 +142,7 @@
       "run_build": [
         {
           "tier": "package_manager",
-          "command": "cd client && npm run build",
+          "command": "cd client && pnpm run build",
           "source": "client/package.json",
           "per_service": "client"
         },

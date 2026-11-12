@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with th
 
 ```bash
 # From client directory
-npm run dev
+pnpm run dev
 # Runs on http://localhost:3000
 ```
 
@@ -475,8 +475,8 @@ src/
 
 ## Quick Reference
 
-**Start dev server:** `npm run dev`
-**Build for production:** `npm run build`
+**Start dev server:** `pnpm run dev`
+**Build for production:** `pnpm run build`
 **Component structure:** Template → Script (Composition API) → Scoped Styles
 **Data loading:** loading state → try/catch → finally
 **Filters:** Composable → refs → watch for changes

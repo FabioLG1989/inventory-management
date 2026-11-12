@@ -34,7 +34,7 @@ The Facts, API & Contracts, and Notable Patterns tables on this page enumerate t
 | Type | frontend |
 | Language | javascript |
 | Path | client |
-| Package manager | npm |
+| Package manager | pnpm |
 | Manifest | client/package.json |
 | Frameworks | Vue 3; UI: Vite |
 | Port | 3000 |
@@ -96,7 +96,7 @@ No automated tests yet — candidate for a new test suite.
 ### Observability & Ops
 
 - The dev server runs on port 3000; the backend is expected at port 8001. Both ports are fixed — do not parameterize them without updating the Playwright test targets documented on [[conventions/project]].
-- Build the client with `cd client && npm run build`; use `./scripts/start.sh` to launch both services together for local development.
+- Build the client with `cd client && pnpm run build`; use `./scripts/start.sh` to launch both services together for local development.
 
 ### Boundaries & Dependencies
 

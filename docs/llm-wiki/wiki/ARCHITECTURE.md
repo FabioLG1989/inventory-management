@@ -121,8 +121,8 @@ uv run python main.py
 **Frontend (`client/`, port 3000):**
 ```bash
 cd client
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Runtime version pins: (not determined by analysis). Consult `server/pyproject.toml` and `client/package.json` for the enforced Python and Node version constraints.
@@ -144,7 +144,7 @@ Build commands per service:
 
 | Service | Command | Source |
 |---------|---------|--------|
-| client | `cd client && npm run build` | `client/package.json` |
+| client | `cd client && pnpm run build` | `client/package.json` |
 | server | `cd server && uv build` | `server/pyproject.toml` |
 
 ## Coupling Hotspots

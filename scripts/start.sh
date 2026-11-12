@@ -29,7 +29,7 @@ fi
 if [ ! -d "$PROJECT_ROOT/client/node_modules" ]; then
     echo -e "${YELLOW}Frontend dependencies not found. Installing...${NC}"
     cd "$PROJECT_ROOT/client"
-    npm install
+    pnpm install
 fi
 
 # Start backend server in background
@@ -44,7 +44,7 @@ sleep 2
 # Start frontend server in background
 echo -e "${GREEN}Starting frontend server on http://localhost:3000${NC}"
 cd "$PROJECT_ROOT/client"
-npm run dev > /tmp/inventory-frontend.log 2>&1 &
+pnpm run dev > /tmp/inventory-frontend.log 2>&1 &
 FRONTEND_PID=$!
 
 # Wait a moment for frontend to start
