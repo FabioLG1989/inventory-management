@@ -10,7 +10,7 @@ Steps:
 3. If on feature branch:
    - Show commits to be lost: `git log main..HEAD --oneline`
    - Store the branch name
-   - Use GitHub MCP to find and close any PRs for this branch: `mcp__github__list_pull_requests` (filter by head branch), then `mcp__github__update_pull_request` to close them
+   - Use `gh` to find and close any PRs for this branch: `gh pr list --head <branch-name> --state open --json number`, then `gh pr close <number>` for each
    - Switch to main: `git checkout main`
    - Delete the feature branch: `git branch -D <branch-name>`
    - Clean up working directory: `git reset --hard HEAD` to discard all tracked file changes

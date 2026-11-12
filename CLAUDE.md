@@ -2,7 +2,22 @@
 
 Factory Inventory Management System Demo with GitHub integration - Full-stack application with Vue 3 frontend, Python FastAPI backend, and in-memory mock data (no database).
 
-> ⚠️ **This repository and any fork you create are PUBLIC.** Do not commit credentials, internal hostnames, or private registry URLs. `client/.npmrc` pins the public npm registry and `client/package-lock.json` is gitignored to prevent locally-configured registries from leaking into commits — leave both in place.
+> ⚠️ **This repository and any fork you create are PUBLIC.** Do not commit credentials, internal hostnames, or private registry URLs. The client uses **pnpm**. `client/.npmrc` pins the public npm registry (pnpm honors it) so the committed `client/pnpm-lock.yaml` never records a private registry; `client/package-lock.json` stays gitignored. Leave both in place and check `pnpm-lock.yaml` has no private registry URLs before committing.
+
+## QAF First (Qubika Agentic Framework)
+
+This project is initialized with QAF. QAF is the default way of working here.
+
+1. **Check for a QAF way before every task.** Before starting any task, check whether a QAF skill or agent covers it (skills in `.claude/skills/`, agents in `.claude/agents/`) and use it when one fits. Examples:
+   - New idea or feature request → `/create-sdd-ticket`
+   - Implementing a ticket → `/implement-ticket` (planning only: `/create-implementation-plan`)
+   - Reviewing a PR → `/pr-reviewer`; security → `/security-review`
+   - Bugs and failures → `/troubleshoot`, `/report-bug`
+   - Tests → `/generate-test-cases`, `/ui-testing`, `/requirement-coverage-gap-analysis`
+   - Parallel work → `/start-task`; wiki upkeep → `/wiki-refresh`
+2. **Always use the LLM Wiki, even without a matching QAF skill.** Before reading or changing code, load `docs/llm-wiki/CLAUDE.md` (router) → `docs/llm-wiki/wiki/index.md` → only the matching pages. Fall back to Grep/Read only when the wiki does not answer.
+3. **Always follow QAF rules.** Apply `.claude/CLAUDE.md` (cheat-sheet and Project-Wide Rules), `docs/llm-wiki/wiki/conventions/project.md`, and the `## Conventions & How-To` section of `docs/llm-wiki/wiki/services/{id}.md` for the service you touch.
+4. **Keep the wiki current.** After out-of-band changes outside `/implement-ticket`, run `/wiki-refresh`.
 
 ## Critical Tool Usage Rules
 
@@ -20,8 +35,9 @@ Use the Task tool with these specialized subagents for appropriate tasks:
 - **backend-api-test** skill: Use when writing or modifying tests in `tests/backend` directory with pytest and FastAPI TestClient
 
 ### MCP Tools
-- **ALWAYS use GitHub MCP tools** (`mcp__github__*`) for ALL GitHub operations
-  - Exception: Local branches only - use `git checkout -b` instead of `mcp__github__create_branch`
+- **ALWAYS use the `gh` CLI** for ALL GitHub operations (PRs, issues, reviews, Actions runs, secrets, API calls via `gh api`)
+  - Local branches: use `git checkout -b` / `git switch -c`
+  - Do not use the GitHub MCP tools (`mcp__github__*`)
 - **ALWAYS use Playwright MCP tools** (`mcp__playwright__*`) for browser testing
   - Test against: `http://localhost:3000` (frontend), `http://localhost:8001` (API)
 
@@ -39,7 +55,7 @@ uv run python main.py
 
 # Frontend
 cd client
-npm install && npm run dev
+pnpm install && pnpm run dev
 ```
 
 ## Key Patterns

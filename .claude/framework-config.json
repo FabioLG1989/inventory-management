@@ -1,0 +1,388 @@
+{
+  "version": "5.0.0",
+  "schema_version": "1.0.0",
+  "sync_version": "5.0.0",
+  "stack_profile": {
+    "services": [
+      {
+        "id": "client",
+        "path": "client",
+        "type": "frontend",
+        "language": "javascript",
+        "frameworks": {
+          "main": "Vue 3",
+          "ui": "Vite"
+        },
+        "testing": {},
+        "commands": {
+          "dev": "cd client && pnpm run dev",
+          "build": "cd client && pnpm run build"
+        },
+        "environment": {
+          "port": 3000
+        },
+        "package_manager": "pnpm",
+        "manifest_file": "client/package.json"
+      },
+      {
+        "id": "server",
+        "path": "server",
+        "type": "backend",
+        "language": "python",
+        "frameworks": {
+          "main": "FastAPI"
+        },
+        "testing": {},
+        "commands": {
+          "build": "cd server && uv build"
+        },
+        "environment": {
+          "port": 8001
+        },
+        "package_manager": "uv",
+        "manifest_file": "server/pyproject.toml"
+      }
+    ],
+    "is_monorepo": false,
+    "software_version_control": "github",
+    "file_counts": {
+      "total": 19,
+      "by_language": {
+        "javascript": 8,
+        "python": 7,
+        "html": 2,
+        "shell": 2
+      }
+    },
+    "automation": {
+      "makefiles": [],
+      "justfiles": [],
+      "taskfiles": [],
+      "shell_scripts": [
+        {
+          "path": "scripts/start.sh",
+          "purpose": "dev",
+          "shebang": "#!/bin/bash"
+        },
+        {
+          "path": "scripts/stop.sh",
+          "purpose": "reset",
+          "shebang": "#!/bin/bash"
+        }
+      ],
+      "ci_hints": []
+    },
+    "readme_run_sections": [
+      {
+        "path": "README.md",
+        "heading": "Quick Start",
+        "body": "**One-command startup:**\n```bash\n./scripts/start.sh\n# Starts both backend and frontend\n# Backend: http://localhost:8001\n# Frontend: http://localhost:3000\n# API Docs: http://localhost:8001/docs\n```\n\n**Manual startup:**\n\nBackend:\n```bash\ncd server\nuv venv && uv sync\nuv run python main.py\n```\n\nFrontend:\n```bash\ncd client\nnpm install\nnpm run dev\n```",
+        "fenced_blocks": [
+          "./scripts/start.sh\n# Starts both backend and frontend\n# Backend: http://localhost:8001\n# Frontend: http://localhost:3000\n# API Docs: http://localhost:8001/docs",
+          "cd server\nuv venv && uv sync\nuv run python main.py",
+          "cd client\nnpm install\nnpm run dev"
+        ]
+      }
+    ],
+    "command_catalog": {
+      "start_dev": [
+        {
+          "tier": "wrapper",
+          "command": "./scripts/start.sh",
+          "description": "Dev-server launcher.",
+          "source": "scripts/start.sh"
+        },
+        {
+          "tier": "readme",
+          "command": "pnpm run dev",
+          "description": "From README.md § Quick Start",
+          "source": "README.md#quick-start"
+        },
+        {
+          "tier": "package_manager",
+          "command": "cd client && pnpm run dev",
+          "source": "client/package.json",
+          "per_service": "client"
+        }
+      ],
+      "reset": [
+        {
+          "tier": "wrapper",
+          "command": "./scripts/stop.sh",
+          "description": "Environment reset.",
+          "source": "scripts/stop.sh"
+        }
+      ],
+      "setup": [
+        {
+          "tier": "readme",
+          "command": "./scripts/start.sh",
+          "description": "From README.md § Quick Start",
+          "source": "README.md#quick-start"
+        },
+        {
+          "tier": "readme",
+          "command": "pnpm install",
+          "description": "From README.md § Quick Start",
+          "source": "README.md#quick-start"
+        },
+        {
+          "tier": "readme",
+          "command": "uv run python main.py",
+          "description": "From README.md § Quick Start",
+          "source": "README.md#quick-start"
+        },
+        {
+          "tier": "readme",
+          "command": "uv venv && uv sync",
+          "description": "From README.md § Quick Start",
+          "source": "README.md#quick-start"
+        }
+      ],
+      "run_build": [
+        {
+          "tier": "package_manager",
+          "command": "cd client && pnpm run build",
+          "source": "client/package.json",
+          "per_service": "client"
+        },
+        {
+          "tier": "package_manager",
+          "command": "cd server && uv build",
+          "source": "server/pyproject.toml",
+          "per_service": "server"
+        }
+      ]
+    }
+  },
+  "resource_state": {
+    "skills": {
+      "start-task": {
+        "managed_by_framework": true,
+        "file_hash": "722a7468d45a1b00eb9ae9e11881cad25952d9d37cee173df16c27a1ca87dd6e",
+        "source_hash": "884a13571d9acd7c44ff07e9e533292abddcb16fa6ad2cdb0f8bd5389e36e0e6",
+        "source_path": "skills/010-foundation/start-task"
+      },
+      "create-sdd-ticket": {
+        "managed_by_framework": true,
+        "file_hash": "42418edf5c66e0200fc5dc38cd7c406656c1f66f6cddbdeb367cf995797e3737",
+        "source_hash": "6a54b9d33d04e9a99fef6e1deac61449db7f2d84d2182ea7274280fd6acecc24",
+        "source_path": "skills/020-development-workflow/create-sdd-ticket"
+      },
+      "skill-creator": {
+        "managed_by_framework": true,
+        "file_hash": "c3783ec47aaf66d8f300f4e6362beaa0a338232ab4cfdf32d753cbce9bfe1ca5",
+        "source_hash": "5c2a3af02dbfca2b26d4a19c9839af7125e285fcd0ccbf75486e14ab22d1302e",
+        "source_path": "skills/020-development-workflow/skill-creator"
+      },
+      "implement-ticket": {
+        "managed_by_framework": true,
+        "file_hash": "927e9c2a3564939260375249f66080d8c9fb309d5973637bd1a1a8731a67d8c5",
+        "source_hash": "3db2bd9268930d22317f74a51b09a909cbaaae49ba25a0d7fe5d3c37686552df",
+        "source_path": "skills/020-development-workflow/implement-ticket"
+      },
+      "lean-code": {
+        "managed_by_framework": true,
+        "file_hash": "560d23c88ffb2f06fcb7114bbd8befc1caaaaded18b15b6ac7caa70a78dabdf7",
+        "source_hash": "9e1c52fae26e1492366522d6153b7cdb5c2979bda5bb23163ba9cef76be395d0",
+        "source_path": "skills/020-development-workflow/lean-code"
+      },
+      "grill-me": {
+        "managed_by_framework": true,
+        "file_hash": "9bb03934677f278e657f3fbab1352ce7517e73882fcfeb97c1909990b3d614ee",
+        "source_hash": "9bb03934677f278e657f3fbab1352ce7517e73882fcfeb97c1909990b3d614ee",
+        "source_path": "skills/020-development-workflow/grill-me"
+      },
+      "create-implementation-plan": {
+        "managed_by_framework": true,
+        "file_hash": "c2e21007c67055150a28282e54cc0e69948310a549d5a2f270f70f4c91da507d",
+        "source_hash": "c305f451e0bb5e7cde61418f885e89b4ca37a60f9dd4e18d73a21f27e88424b0",
+        "source_path": "skills/020-development-workflow/create-implementation-plan"
+      },
+      "apply-pr-feedback": {
+        "managed_by_framework": true,
+        "file_hash": "1f2aa9881e752aadb81d5ed00f766f682cc26f58476e26beebe2a4124f5f2ce4",
+        "source_hash": "cccb7c51b706df931b534933f06ae7f8850d4afdaa448f3001725fdf953624ce",
+        "source_path": "skills/020-development-workflow/apply-pr-feedback"
+      },
+      "apply-ticket-feedback": {
+        "managed_by_framework": true,
+        "file_hash": "7e5afa91e40dacde96b30ebacd609a77db4d42fe137da423f19317beae40178e",
+        "source_hash": "b79874ae9eb9d91b70568a904a2608dffa5558356ba22220d14eba359a75c7bf",
+        "source_path": "skills/020-development-workflow/apply-ticket-feedback"
+      },
+      "wiki-refresh": {
+        "managed_by_framework": true,
+        "file_hash": "7aa8e3770ccd827588ce91ae2ed3ee0e234156776f4aca445347c03cc28c5bb0",
+        "source_hash": "ceefe0818f07c8a3c61f7c0b72f22f6f444cc1fe2e2648ecb8b4e6cfdaf9c0c8",
+        "source_path": "skills/020-development-workflow/wiki-refresh"
+      },
+      "wiki-add-service": {
+        "managed_by_framework": true,
+        "file_hash": "56a5f68d3238998ba98613e60b7b3a90a1df37219c9ad98603a4a1903a07cf05",
+        "source_hash": "5c2fef98e8b71cbeac18f8411b367fafa0c6c5626235aad89e515ef145bce927",
+        "source_path": "skills/020-development-workflow/wiki-add-service"
+      },
+      "repo-fanout-pr": {
+        "managed_by_framework": true,
+        "file_hash": "c1afff9078d5876e5993fcd1f481702815deb4f3f9e3e3cf36080019f53f3d72",
+        "source_hash": "267e05edd8998b49425674079dfae05219fefd30c70e8e1b8874a1805033e02f",
+        "source_path": "skills/020-development-workflow/repo-fanout-pr"
+      },
+      "doc-updater": {
+        "managed_by_framework": true,
+        "file_hash": "ba1dc68e53010c5216a41a5e551232873c9b8234ff7d27bfcdb6db598947e0c4",
+        "source_hash": "75158a44163d533dff86fb0bff9b83058a32de7382b771b48d8af8619ea1b74b",
+        "source_path": "skills/030-quality-assurance/doc-updater"
+      },
+      "pr-reviewer": {
+        "managed_by_framework": true,
+        "file_hash": "dc76823274da7b876e32f35d23855599def440e6783935f8da23840617431bca",
+        "source_hash": "4088f6f3549d6d17b5be32652954c33a5aec072198a8e3ed049895d25e454898",
+        "source_path": "skills/030-quality-assurance/pr-reviewer"
+      },
+      "security-review": {
+        "managed_by_framework": true,
+        "file_hash": "efaf9ff348fe7426fa5cdf91c16d5a2950e1356d2016c977e7f36f082f264a4c",
+        "source_hash": "040aeb997e0378f96cf1c5906e76070120b0412b43b38846a77ad792168a1177",
+        "source_path": "skills/030-quality-assurance/security-review"
+      },
+      "test-execution-history": {
+        "managed_by_framework": true,
+        "file_hash": "04e596f2d271fc5f04847ba5cd5f52bb764c87b20f03d59a6c11c1958cc2c4aa",
+        "source_hash": "351b43e15249fa10cf26d08b119d5270706d8ce854373b908972f775be74b8d6",
+        "source_path": "skills/030-quality-assurance/test-execution-history"
+      },
+      "generate-test-cases": {
+        "managed_by_framework": true,
+        "file_hash": "1c263216ac64d77412a8b61ccab5ee9ad8b54d2d4e6515255f1350da66082731",
+        "source_hash": "1c263216ac64d77412a8b61ccab5ee9ad8b54d2d4e6515255f1350da66082731",
+        "source_path": "skills/030-quality-assurance/generate-test-cases"
+      },
+      "test-data-strategy": {
+        "managed_by_framework": true,
+        "file_hash": "4b443d99e7b519e283ec890be7d05816a9d77c65268e9dd22fd4a8a6aad6a082",
+        "source_hash": "3c4080b85b368d8bbcb64c68b608f5c4cd0cb7102b11b273dc9392204ab8d0bf",
+        "source_path": "skills/030-quality-assurance/test-data-strategy"
+      },
+      "requirement-coverage-gap-analysis": {
+        "managed_by_framework": true,
+        "file_hash": "52cca1fda8e6f58acf203b95de35cc9851c836cbc20a9376d4b7671827917f17",
+        "source_hash": "c1f9b88ca6d9885d5277d96258c0f46c828779d34f02034b581cacc9b0cbf044",
+        "source_path": "skills/030-quality-assurance/requirement-coverage-gap-analysis"
+      },
+      "clarify-requirement": {
+        "managed_by_framework": true,
+        "file_hash": "ac81d5de976a35f9fac7d14074b033b350a61eea19614a50475d5f49668e293d",
+        "source_hash": "ac81d5de976a35f9fac7d14074b033b350a61eea19614a50475d5f49668e293d",
+        "source_path": "skills/030-quality-assurance/clarify-requirement"
+      },
+      "report-bug": {
+        "managed_by_framework": true,
+        "file_hash": "bf86082bb1c9d39d61f46deeba1d53f67621f39c2774483bfef247f80ed2ed54",
+        "source_hash": "d53f0388986425a5aca7028e814132c1af562d1d8f5f1cfb92f217e285f2200a",
+        "source_path": "skills/030-quality-assurance/report-bug"
+      },
+      "ui-testing": {
+        "managed_by_framework": true,
+        "file_hash": "d729b6f93e4a7065bb7b7055ab3522f7ea9f21ed41b4165ab04c1ea18800acf9",
+        "source_hash": "d729b6f93e4a7065bb7b7055ab3522f7ea9f21ed41b4165ab04c1ea18800acf9",
+        "source_path": "skills/030-quality-assurance/ui-testing"
+      },
+      "ui-visual-testing": {
+        "managed_by_framework": true,
+        "file_hash": "e5dbffcbaebd93b7ebede426cd5c04c6c63a958688180ed86b8cf21ae99e1099",
+        "source_hash": "e5dbffcbaebd93b7ebede426cd5c04c6c63a958688180ed86b8cf21ae99e1099",
+        "source_path": "skills/030-quality-assurance/ui-visual-testing"
+      },
+      "accessibility-testing": {
+        "managed_by_framework": true,
+        "file_hash": "9bcbc7f0f0380093641749e07c30ff18482f4096ee749d30c85989af94a553a6",
+        "source_hash": "791810ee9618497ddb5435c8fd61c8aa1d2bbe1d759ea45105e538bb44af7f57",
+        "source_path": "skills/030-quality-assurance/accessibility-testing"
+      },
+      "performance-testing": {
+        "managed_by_framework": true,
+        "file_hash": "9eedc972fa0c5953a25a6d65e8b5a89e2df2f6dc2e3456c923231bd4abe2565d",
+        "source_hash": "4bcb46faf38413ce8d91cf60cd471813f15be6d0594d0e72f732af89f7776f11",
+        "source_path": "skills/030-quality-assurance/performance-testing"
+      },
+      "owasp-security-testing": {
+        "managed_by_framework": true,
+        "file_hash": "f63766244245e6a20e1cc6b26d675ee57c7ec8d5ba3a27c945de058d518bfefd",
+        "source_hash": "f3bf0e02164373e52c037a8fdc2013ce82a02182695ccf94163acd6f406ba813",
+        "source_path": "skills/030-quality-assurance/owasp-security-testing"
+      },
+      "fetch-ticket-context": {
+        "managed_by_framework": true,
+        "file_hash": "4e01753a7a55a72d564c327d397060d28caacbc1d7c3ddea875f37dcf703549a",
+        "source_hash": "7eba18be64da860b2e57c12a67584317cfe12f0edded9a0fa4faf908f3e3bc9a",
+        "source_path": "skills/040-integrations/fetch-ticket-context"
+      },
+      "figma-design-fetcher": {
+        "managed_by_framework": true,
+        "file_hash": "a586acd05f7ddf9a2dc428f06ec602072f8cc46c9f668c9a57cb363b19f0fd81",
+        "source_hash": "a586acd05f7ddf9a2dc428f06ec602072f8cc46c9f668c9a57cb363b19f0fd81",
+        "source_path": "skills/040-integrations/figma-design-fetcher"
+      },
+      "vue-frontend": {
+        "managed_by_framework": true,
+        "file_hash": "77d54472b928707762e8d495de22a698f9261bece2fe32a087189a56eba6ac15",
+        "source_hash": "77d54472b928707762e8d495de22a698f9261bece2fe32a087189a56eba6ac15",
+        "source_path": "skills/050-language-frameworks/vue-frontend"
+      },
+      "design-doc-mermaid": {
+        "managed_by_framework": true,
+        "file_hash": "e95cd4d93405b906154c3051f6fb41d2dd438fb7539d66592704a8f636eaadb9",
+        "source_hash": "e95cd4d93405b906154c3051f6fb41d2dd438fb7539d66592704a8f636eaadb9",
+        "source_path": "skills/060-documentation/design-doc-mermaid"
+      },
+      "wiki-ingest-external-docs": {
+        "managed_by_framework": true,
+        "file_hash": "508f654f296e53b778ab466e89a452171b9da5b758c32e9bce57eb87aa5f4282",
+        "source_hash": "dc84597e9700562f08aa980ae7a03ccf5f82c5e363f543e6002444673ae6d1ce",
+        "source_path": "skills/020-development-workflow/wiki-ingest-external-docs"
+      },
+      "troubleshoot": {
+        "managed_by_framework": true,
+        "file_hash": "74364c8c6410ef12b9a893b396dc54209854d343a1aef89b7401f7c53e5d567e",
+        "source_hash": "37869875d21f8beeda4c50297567b59086bf23ede069f034dea97c43afa42c98",
+        "source_path": "skills/070-infrastructure/troubleshoot"
+      }
+    },
+    "agents": {
+      "planner": {
+        "managed_by_framework": true,
+        "file_hash": "467c68f85f13010ebc6bc2cc70f7b5fcc19a504f68eb19d3f87c8e63dd08711e",
+        "template_hash": "135d2f3d8aa8d46128d6a3d39ef4293be96e06619f63b772a655723006adc3c0",
+        "template_path": "agents/templates/planner.template.md"
+      },
+      "implementer-generic": {
+        "managed_by_framework": true,
+        "file_hash": "82c59125e964c13ae06f78706e6c6906fa40f389299eebaad29dc5ae83e9e985",
+        "template_hash": "82e971987769d21f1b812075c5194c62692197c069d294296aedb8c03892bc63",
+        "template_path": "agents/templates/implementer-generic.template.md"
+      },
+      "visual-verifier": {
+        "managed_by_framework": true,
+        "file_hash": "caca2e39d920f522db710c094f288854e509af0b1ab1c0c3edd8224c8fb61bd1",
+        "template_hash": "16a0b13cdb5fcf1bf5517ca46ae16f3143c08c258e0269e673b194c0c3a20616",
+        "template_path": "agents/templates/visual-verifier.template.md"
+      }
+    }
+  },
+  "tool_defaults": {
+    "implement-ticket": {
+      "create_commit": false,
+      "push_branch": false,
+      "create_pr": false,
+      "skip_pr_review": false,
+      "skip_visual": false,
+      "skip_tests": false,
+      "max_review_iterations": 3
+    },
+    "create-implementation-plan": {
+      "critique": false
+    }
+  }
+}

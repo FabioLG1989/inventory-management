@@ -42,8 +42,8 @@ uv run python main.py
 Frontend:
 ```bash
 cd client
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## API Endpoints
@@ -72,7 +72,7 @@ Data files: `server/data/*.json`
 
 ```bash
 cd client
-npm run build  # Output: client/dist/
+pnpm run build  # Output: client/dist/
 ```
 
 ## Platform Notes
@@ -91,8 +91,8 @@ uv run python main.py
 Frontend:
 ```bash
 cd client
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 To stop the servers, press Ctrl+C in each terminal window.

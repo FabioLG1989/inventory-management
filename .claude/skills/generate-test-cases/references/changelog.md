@@ -1,0 +1,30 @@
+# Version History — `generate-test-cases`
+
+- **1.2.3** (2026-09-16): Cross-linked into the two new quality-assurance gap-closing skills
+  - "When to Use vs Other Skills" now routes to `/requirement-coverage-gap-analysis` (existing-suite gap check) and `/test-data-strategy` (data governance)
+  - Phase 3e coverage checklist and batch Quality Checks each gained a no-PII/synthetic-data bullet enforcing `test-data-strategy`'s rules on every generated value
+  - "Integration with Other Skills" now recommends running `/requirement-coverage-gap-analysis` before regenerating cases for a ticket that already has some tests
+- **1.2.2** (2026-09-15): Pending-clarification handoff and cleanup
+  - Phase 4 now appends any `## Pending Clarification` entries collected in Phase 1.5 after the adapter's own success report, regardless of which adapter ran (or the display-only path) — skipped cases no longer disappear once publishing starts, and are excluded from the adapter's `Created N` count
+  - Adds a matching exit-code contract (`0` clean, `4` published-with-a-pending-clarification, `1` fully blocked), mirroring `/verify-with-argent` and `/verify-with-agent-device`
+  - Phase 1.5's `--from-jira` call to `/clarify-requirement` now passes `--artifacts-dir`, so a settled or pending answer actually persists across reruns instead of being silently dropped
+  - Removes the dead `/analyze-requirements` reference (that skill no longer exists); its Testing Strategy is generated from `/implement-ticket`'s plan instead
+- **1.2.1** (2026-09-11): Ambiguity Gate fixes
+  - "Assumed output" tagging now scoped to actually-assumed sources (`headless-posted-pending`, `headless-assumed`), per `/clarify-requirement`'s own source classification — a live human answer (`mcp`/`interactive`) no longer gets mistakenly tagged `assumed`, and no longer falls through untagged either
+  - `headless-assumed` postcondition note no longer claims a confirmation is "pending"; no longer claims "no ticket" unconditionally either, since `/clarify-requirement` can also return `headless-assumed` for a `--ticket` call when Atlassian MCP is unreachable
+  - `--from-jira` example now passes `--dedup-key` to `/clarify-requirement`, since this skill re-phrases `--question` each run and text-based dedup alone misses the repost
+- **1.2.0** (2026-09-09): Phase 1.5 Ambiguity Gate
+  - Before generating cases, flags coverage-affecting gaps (undefined boundaries, contradictory checklist items, missing decision-table branches, absent checklist/ACs) and calls `/clarify-requirement` instead of guessing
+  - Replaces the old silent fallback ("no checklist/ACs found → generate from description, review before publishing") with an explicit ask-the-ticket-comments-then-ask-a-human flow
+  - Ambiguities resolved from an assumed/recommended answer get a label-safe `tags` entry (`assumed-pending-<KEY>` or `assumed`) plus a human-readable note in `postconditions` — never free-form punctuation in `tags`, which maps straight to Jira/Xray labels and rejects it; blocking ones are skipped and listed under `## Pending Clarification` rather than guessed
+- **1.1.0** (2026-06-11): Conditional test generation techniques
+  - Adds cross-endpoint consistency, security, accessibility, and performance as conditional test-design techniques with matching coverage-checklist items, gated on trigger conditions (multi-endpoint resources, auth/authz, UI components, SLA/scale)
+- **1.0.0** (2026-05-08): Initial stable release
+  - Input modes: `--from-jira`, `--from-text`, `--from-markdown`
+  - Output adapters: `--to-qase`, `--to-jira`, `--to-testrail`, `--to-xray`, `--to-markdown`, plus display-only fallback
+  - Canonical test case format with classic and gherkin step styles
+  - Progressive disclosure architecture: adapter files loaded on-demand by `--to-*` flag, references loaded conditionally per phase
+  - Always-loaded references (test-design techniques, quality checks) inlined into SKILL.md for zero-latency access
+  - Per-step progress announcements (`⏳` / `✓`) across all phases to eliminate silent gaps
+  - Extensibility guide for adding new output adapters
+  - Format preference persistence via `generate-test-cases.json`

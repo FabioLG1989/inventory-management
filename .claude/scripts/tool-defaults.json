@@ -1,0 +1,14 @@
+{
+  "implement-ticket": {
+    "create_commit": { "type": "boolean", "default": false },
+    "push_branch": { "type": "boolean", "default": false },
+    "create_pr": { "type": "boolean", "default": false },
+    "skip_pr_review": { "type": "boolean", "default": false },
+    "skip_visual": { "type": "boolean", "default": false },
+    "skip_tests": { "type": "boolean", "default": false },
+    "max_review_iterations": { "type": "number", "default": 3 }
+  },
+  "create-implementation-plan": {
+    "critique": { "type": "boolean", "default": false }
+  }
+}

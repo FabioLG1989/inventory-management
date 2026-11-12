@@ -1,0 +1,20 @@
+{
+  "$schema": "https://qubika-agentic-framework/schemas/ui-visual-testing.schema.json",
+  "figma": {
+    "fileKey": "<YOUR_FIGMA_FILE_KEY>"
+  },
+  "thresholds": {
+    "figma": 2,
+    "regression": 5
+  },
+  "maxIterations": 3,
+  "screens": [
+    {
+      "label": "Screen Name – Desktop",
+      "figmaNodeId": "<FIGMA_NODE_ID>",
+      "route": "/your-route",
+      "viewport": { "width": 1440, "height": 900 },
+      "modes": ["figma", "screenshot"]
+    }
+  ]
+}
