@@ -4,6 +4,21 @@ Factory Inventory Management System Demo with GitHub integration - Full-stack ap
 
 > ⚠️ **This repository and any fork you create are PUBLIC.** Do not commit credentials, internal hostnames, or private registry URLs. `client/.npmrc` pins the public npm registry and `client/package-lock.json` is gitignored to prevent locally-configured registries from leaking into commits — leave both in place.
 
+## QAF First (Qubika Agentic Framework)
+
+This project is initialized with QAF. QAF is the default way of working here.
+
+1. **Check for a QAF way before every task.** Before starting any task, check whether a QAF skill or agent covers it (skills in `.claude/skills/`, agents in `.claude/agents/`) and use it when one fits. Examples:
+   - New idea or feature request → `/create-sdd-ticket`
+   - Implementing a ticket → `/implement-ticket` (planning only: `/create-implementation-plan`)
+   - Reviewing a PR → `/pr-reviewer`; security → `/security-review`
+   - Bugs and failures → `/troubleshoot`, `/report-bug`
+   - Tests → `/generate-test-cases`, `/ui-testing`, `/requirement-coverage-gap-analysis`
+   - Parallel work → `/start-task`; wiki upkeep → `/wiki-refresh`
+2. **Always use the LLM Wiki, even without a matching QAF skill.** Before reading or changing code, load `docs/llm-wiki/CLAUDE.md` (router) → `docs/llm-wiki/wiki/index.md` → only the matching pages. Fall back to Grep/Read only when the wiki does not answer.
+3. **Always follow QAF rules.** Apply `.claude/CLAUDE.md` (cheat-sheet and Project-Wide Rules), `docs/llm-wiki/wiki/conventions/project.md`, and the `## Conventions & How-To` section of `docs/llm-wiki/wiki/services/{id}.md` for the service you touch.
+4. **Keep the wiki current.** After out-of-band changes outside `/implement-ticket`, run `/wiki-refresh`.
+
 ## Critical Tool Usage Rules
 
 ### Subagents
