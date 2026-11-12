@@ -60,3 +60,6 @@ logs/
 .codex-backups/
 qubika-agentic-framework/
 .codex/config.toml
+
+# Operational memory (local only, see CLAUDE.md)
+.claude/memory/
