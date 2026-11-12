@@ -2,7 +2,7 @@
 
 Factory Inventory Management System Demo with GitHub integration - Full-stack application with Vue 3 frontend, Python FastAPI backend, and in-memory mock data (no database).
 
-> ⚠️ **This repository and any fork you create are PUBLIC.** Do not commit credentials, internal hostnames, or private registry URLs. The client uses **pnpm**. `client/.npmrc` pins the public npm registry (pnpm honors it) so `client/pnpm-lock.yaml` never records a private registry; `client/package-lock.json` stays gitignored. Leave both in place and check `pnpm-lock.yaml` has no private registry URLs before committing.
+> ⚠️ **This repository and any fork you create are PUBLIC.** Do not commit credentials, internal hostnames, or private registry URLs. The client uses **pnpm**. `client/.npmrc` pins the public npm registry (pnpm honors it), and both `client/pnpm-lock.yaml` and `client/package-lock.json` are gitignored to prevent locally-configured registries from leaking into commits — leave all of this in place.
 
 ## QAF First (Qubika Agentic Framework)
 
