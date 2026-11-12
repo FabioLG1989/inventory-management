@@ -25,6 +25,12 @@ if [ ! -d "$PROJECT_ROOT/server/.venv" ]; then
     uv sync
 fi
 
+# The client uses pnpm (version pinned in client/package.json "packageManager")
+if ! command -v pnpm >/dev/null 2>&1; then
+    echo -e "${YELLOW}pnpm not found. Install it with 'corepack enable' (ships with Node) or 'npm install -g pnpm', then re-run.${NC}"
+    exit 1
+fi
+
 # Check if frontend dependencies are installed
 if [ ! -d "$PROJECT_ROOT/client/node_modules" ]; then
     echo -e "${YELLOW}Frontend dependencies not found. Installing...${NC}"
