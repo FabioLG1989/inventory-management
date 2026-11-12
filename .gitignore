@@ -53,3 +53,10 @@ logs/
 
 # Environment variables
 .env
+
+.claude-temp/
+.codex-temp/
+.claude-backups/
+.codex-backups/
+qubika-agentic-framework/
+.codex/config.toml
