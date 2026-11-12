@@ -20,19 +20,34 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
-      issues: read
+      pull-requests: write # QAF skills (e.g. pr-reviewer) post reviews/comments via gh
+      issues: write
       id-token: write
       actions: read # Required for Claude to read CI results on PRs
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0 # QAF skills diff against the base branch
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: client/package.json
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
 
       - name: Run Claude Code
         id: claude
         uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }} # gh CLI auth for QAF skills (all GitHub operations go through gh)
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
@@ -46,5 +61,6 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          # claude_args: '--allowed-tools Bash(gh pr *)'
+          # Tools QAF skills need: gh for GitHub, node/python scripts, pnpm/uv for builds and tests, subagents and skills
+          claude_args: '--allowedTools "Bash(gh:*),Bash(git:*),Bash(node:*),Bash(python3:*),Bash(pnpm:*),Bash(uv:*),Bash(mkdir:*),Bash(mv:*),Bash(rm:*),Bash(ls:*),Bash(cat:*),Bash(jq:*),Read,Write,Edit,Glob,Grep,Task,Skill"'
 
