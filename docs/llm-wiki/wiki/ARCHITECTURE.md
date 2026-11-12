@@ -143,7 +143,7 @@ There is no Makefile, Justfile, or Taskfile. The software version control host i
 | Workflow | Trigger | What it does | Source |
 |----------|---------|--------------|--------|
 | Claude Code Review | PR opened / pushed / reopened | Runs the QAF `/pr-reviewer` skill and posts one formal review via `gh api` | `.github/workflows/claude-code-review.yml` |
-| Claude Code | `@claude` in an issue, PR comment or review | Runs Claude with QAF skills and `gh`, `git`, `node`, `python3`, `pnpm`, `uv` allowed | `.github/workflows/claude.yml` |
+| Claude Code | `@claude` in an issue, PR comment or review | Runs Claude with QAF skills and `gh`, `git`, `node`, `python3`, `pnpm`, `uv`, `curl` allowed; installs headless Chromium for the Playwright MCP so it can check the running app | `.github/workflows/claude.yml` |
 
 Build commands per service:
 

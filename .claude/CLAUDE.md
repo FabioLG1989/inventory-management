@@ -55,7 +55,7 @@ project/
 - Repository and any fork is PUBLIC — do not commit credentials, internal hostnames, or private registry URLs.
 - The client uses pnpm: `client/.npmrc` pins the public npm registry and `client/pnpm-lock.yaml` is committed; `client/package-lock.json` is gitignored — leave both in place and never commit a lockfile containing private registry URLs.
 - Use the `gh` CLI for ALL GitHub operations (PRs, issues, reviews, Actions, `gh api`); create local branches with `git checkout -b`. Do not use GitHub MCP tools (`mcp__github__*`).
-- PR reviews use the QAF `/pr-reviewer` skill, locally and in CI: `.github/workflows/claude-code-review.yml` runs it on every PR; `.github/workflows/claude.yml` answers `@claude` mentions with QAF skills enabled.
+- PR reviews use the QAF `/pr-reviewer` skill, locally and in CI: `.github/workflows/claude-code-review.yml` runs it on every PR; `.github/workflows/claude.yml` answers `@claude` mentions with QAF skills enabled and can start the app and check it with the Playwright MCP (headless Chromium).
 - Use Playwright MCP tools (`mcp__playwright__*`) for browser testing against `http://localhost:3000` and `http://localhost:8001`.
 - Delegate any create/significant-modify of `.vue` files to the `vue-expert` subagent.
 - Use the `backend-api-test` skill when writing or modifying tests under `tests/backend` (pytest + FastAPI TestClient).

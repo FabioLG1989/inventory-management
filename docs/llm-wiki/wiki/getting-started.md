@@ -66,4 +66,4 @@ These wrappers are the canonical entry points. They orchestrate dependent servic
 | Workflow | Trigger | Command / action | Source |
 |---|---|---|---|
 | Claude Code Review | PR opened / pushed | `/pr-reviewer` (QAF) via `anthropics/claude-code-action` | `.github/workflows/claude-code-review.yml` |
-| Claude Code | `@claude` mention | Claude Code with QAF skills via `anthropics/claude-code-action` | `.github/workflows/claude.yml` |
+| Claude Code | `@claude` mention | Claude Code with QAF skills and Playwright MCP (headless Chromium) via `anthropics/claude-code-action` | `.github/workflows/claude.yml` |

@@ -45,7 +45,16 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # QAF pr-reviewer skill (.claude/skills/pr-reviewer): parallel specialists + judge, posts one formal review
           prompt: '/pr-reviewer --pr-url https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }} --mode automated'
-          claude_args: '--allowedTools "Bash(gh:*),Bash(git:*),Bash(node:*),Bash(mkdir:*),Bash(mv:*),Bash(rm:*),Bash(ls:*),Bash(cat:*),Bash(jq:*),Read,Write,Glob,Grep,Task,Skill"'
+          claude_args: >-
+            --allowedTools "Bash(gh:*),Bash(git:*),Bash(node:*),Bash(mkdir:*),Bash(mv:*),Bash(rm:*),Bash(ls:*),Bash(cat:*),Bash(jq:*),Read,Write,Glob,Grep,Task,Skill"
+            --append-system-prompt "Running in GitHub Actions: gh is authenticated with the workflow GITHUB_TOKEN as github-actions[bot], and gh api user returns 403 for that token. Wherever a skill needs the current GitHub login (e.g. VIEWER in the QAF pr-reviewer pipeline), use github-actions[bot] instead of calling gh api user."
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
 
+      - name: Upload Claude execution log
+        if: always() && steps.claude-review.outputs.execution_file != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: claude-review-execution-${{ github.run_id }}
+          path: ${{ steps.claude-review.outputs.execution_file }}
+          retention-days: 7

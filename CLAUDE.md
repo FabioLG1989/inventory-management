@@ -40,7 +40,8 @@ Use the Task tool with these specialized subagents for appropriate tasks:
   - Do not use the GitHub MCP tools (`mcp__github__*`); no GitHub MCP server is configured
 - **GitHub Actions** (`.github/workflows/`):
   - `claude-code-review.yml` runs the QAF `/pr-reviewer` skill on every PR open/push and posts one formal review via `gh api`
-  - `claude.yml` runs Claude when someone writes `@claude` in an issue, PR comment or review; QAF skills, `gh`, `git`, `node`, `python3`, `pnpm` and `uv` are allowed there
+  - `claude.yml` runs Claude when someone writes `@claude` in an issue, PR comment or review; QAF skills, `gh`, `git`, `node`, `python3`, `pnpm`, `uv`, `curl`, the start/stop scripts and the Playwright MCP (headless Chromium) are allowed there, so it can start the app and check it in a browser
+  - In CI, `gh` runs as `github-actions[bot]` with the workflow `GITHUB_TOKEN` (`gh api user` is not available); each run uploads Claude's execution log as an artifact for debugging
   - Workflow changes only take effect after they are merged to `main`
 
 ### MCP Tools
